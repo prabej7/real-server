@@ -4,7 +4,7 @@ const { getData } = require("../../services/auth");
 const User = require("../../models/user.model");
 const getUser = Router();
 
-getUser.post("/", checkField(1), (req, res) => {
+getUser.post("/", (req, res) => {
   (async () => {
     try {
       const { token } = req.body;
@@ -12,6 +12,8 @@ getUser.post("/", checkField(1), (req, res) => {
       if (isVerfied != 1) {
         const user = await User.findById(isVerfied.id);
         return res.status(200).json(user);
+      } else {
+        return res.status(401).json({ error: "Access Denied!" });
       }
     } catch (e) {
       console.log(e);
