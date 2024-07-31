@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const checkFields = require("../middlewares/checkFields.middleware");
-const User = require("../models/user.model");
+const checkFields = require("../../middlewares/checkFields.middleware");
+const User = require("../../models/user.model");
 const { compareSync } = require("bcrypt");
-const checkUser = require("../utils/checkUser.utils");
-const { getToken } = require("../services/auth");
+const checkUser = require("../../utils/checkUser.utils");
+const { getToken } = require("../../services/auth");
 const login = Router();
 
 login.post("/", checkFields(2), (req, res) => {

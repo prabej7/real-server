@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const checkFields = require("../middlewares/checkFields.middleware");
-const checkUser = require("../utils/checkUser.utils");
-const User = require("../models/user.model");
-const { getToken } = require("../services/auth");
+const checkFields = require("../../middlewares/checkFields.middleware");
+const checkUser = require("../../utils/checkUser.utils");
+const User = require("../../models/user.model");
+const { getToken } = require("../../services/auth");
 const { hashSync } = require("bcrypt");
 const register = Router();
 

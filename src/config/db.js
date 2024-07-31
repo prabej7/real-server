@@ -4,10 +4,12 @@ const connectToDatabase = () => {
   if (!DBURL) return console.log("Please provide db url!");
   connect(DBURL)
     .then(() => {
-      console.log("Database connect successfully!");
+      console.log("Database connected successfully!");
     })
     .catch((e) => {
-      console.error(e);
+      connect("mongodb://localhost:27017/real").then(() => {
+        console.log("Database connected successfully!");
+      });
     });
 };
 
