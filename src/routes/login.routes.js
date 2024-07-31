@@ -15,7 +15,10 @@ login.post("/", checkFields(2), (req, res) => {
         const user = await User.findOne({ email: email });
         const isPasswordCorrect = compareSync(password, user.password);
         if (isPasswordCorrect) {
-          const token = getToken(user);
+          const token = getToken({
+            id: user.id,
+            email: user.email,
+          });
           return res
             .status(200)
             .json({ message: "User is authorized!", token: token });
@@ -28,6 +31,7 @@ login.post("/", checkFields(2), (req, res) => {
         res.status(404).json({ error: "User doesn't exists!" });
       }
     } catch (e) {
+      console.log(e);
       res.status(500).json({ error: "Internal Server Error!" });
     }
   })();

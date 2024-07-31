@@ -8,7 +8,11 @@ const getToken = (payload) => {
 
 const getData = (token) => {
   if (!token) return "Please provide token!";
-  return jwt.verify(token, secret);
+  try {
+    return jwt.verify(token, secret);
+  } catch (e) {
+    return 1;
+  }
 };
 
 module.exports = { getToken, getData };

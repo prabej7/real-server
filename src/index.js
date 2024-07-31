@@ -9,8 +9,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-// Routes
+const connectToDB = require("./config/db");
+connectToDB();
 
+// Routes
+app.use("/register", require("./routes/register.routes"));
+app.use("/login", require("./routes/login.routes"));
+app.use("/partial", require("./routes/accounts/partial.routes"));
+app.use("/auth", require("./routes/auth/auth.routes"));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

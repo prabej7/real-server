@@ -5,10 +5,11 @@ const User = require("../../models/user.model");
 const partial = Router();
 
 partial.post("/", checkFields(3), (req, res) => {
-  async () => {
+  (async () => {
     try {
       const { phone, fullName, address, token } = req.body;
-      const user_id = getData(token)._id;
+      const user_id = getData(token).id;
+      console.log(user_id);
       await User.updateOne(
         { _id: user_id },
         { $set: { phone: phone, fullName: fullName, address: address } }
@@ -17,7 +18,7 @@ partial.post("/", checkFields(3), (req, res) => {
     } catch (e) {
       return res.status(500).json({ error: "Internal Server Error!" });
     }
-  };
+  })();
 });
 
 module.exports = partial;
