@@ -18,6 +18,7 @@ app.use("/login", require("./routes/user/login.routes"));
 app.use("/partial", require("./routes/accounts/partial.routes"));
 app.use("/auth", require("./routes/auth/auth.routes"));
 app.use("/user", require("./routes/user/getUser.routes"));
+app.use("/otp", require("./routes/auth/opt.routes"));
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
