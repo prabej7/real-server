@@ -28,6 +28,11 @@ const userSchema = new Schema(
     address: {
       type: String,
     },
+    isVerified: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,

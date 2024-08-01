@@ -15,6 +15,7 @@ register.post("/", checkFields(2), (req, res) => {
         const newUser = new User({
           email: email,
           password: hashSync(password, 12),
+          isVerified: false,
         });
 
         const savedUser = await newUser.save();
