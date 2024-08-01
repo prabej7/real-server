@@ -5,8 +5,8 @@ const verifyotp = Router();
 
 verifyotp.post("/", (req, res) => {
   (async () => {
-    const { token, userOtp } = req.body;
-    const otp = getData(token);
+    const { userOtp, otpToken } = req.body;
+    const otp = getData(otpToken);
     if (otp !== 1) {
       if (otp == userOtp) {
         return res.status(200).json({ message: "Successfully verified!" });
