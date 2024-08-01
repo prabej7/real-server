@@ -10,13 +10,10 @@ verifyotp.post("/", (req, res) => {
     const otp = getData(otpToken);
     if (otp !== 1) {
       if (otp == userOtp) {
-        await User.updateOne(
-          { _id: userid },
-          { $set: { isVerified: true } }
-        );
+        await User.updateOne({ _id: userid }, { $set: { isVerified: true } });
         return res.status(200).json({ message: "Successfully verified!" });
       } else {
-        return res.status(404).json({ error: "Invlid OTP" });
+        return res.status(401).json({ error: "Invlid OTP" });
       }
     }
     return res.status(401).json({ error: "Invalid Token" });
