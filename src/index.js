@@ -20,7 +20,13 @@ app.use("/auth", require("./routes/auth/auth.routes"));
 app.use("/user", require("./routes/user/getUser.routes"));
 app.use("/otp", require("./routes/auth/opt.routes"));
 app.use("/verify-otp", require("./routes/auth/verifyotp.routes"));
-
+app.use("/add-room", require("./routes/admin/AddRoom"));
+app.use("/admin-login", require("./routes/admin/adminlogin.routes"));
+app.use("/admin-register", require("./routes/admin/adminRegister.routes"));
+app.use("/add-hostel", require("./routes/admin/addHostel.routes"));
+app.use("/rooms", require("./routes/get/room.routes"));
+app.use("/book-room", require("./routes/accounts/booRoom.routes"));
+app.use("/get-admin", require("./routes/get/admin.routes"));
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -16,7 +16,7 @@ partial.post("/", upload.single("file"), (req, res) => {
       if (address !== "undefined") update.address = address;
       if (fullName !== "undefined") update.fullName = fullName;
       if (req.file) {
-        const fileurl = await uploadToCloud(req);
+        const fileurl = await uploadToCloud(req.file);
         update.avatar = fileurl;
       }
       const user_id = getData(token).id;

@@ -36,6 +36,18 @@ const userSchema = new Schema(
     avatar: {
       type: String,
     },
+    rooms: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "room",
+      },
+    ],
+    hostel: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "hostel",
+      },
+    ],
   },
   {
     timestamps: true,

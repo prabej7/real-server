@@ -10,7 +10,10 @@ getUser.post("/", (req, res) => {
       const { token } = req.body;
       const isVerfied = getData(token);
       if (isVerfied != 1) {
-        const user = await User.findById(isVerfied.id);
+        const user = await User.findById(isVerfied.id).populate({
+          path: "rooms",
+        });
+
         return res.status(200).json(user);
       } else {
         return res.status(401).json({ error: "Access Denied!" });
