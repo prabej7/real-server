@@ -4,6 +4,7 @@ const Admin = require("../../models/admin.model");
 const Room = require("../../models/room.model");
 const addRoom = Router();
 const { getData } = require("../../services/auth");
+const uploadToCloud = require("../../utils/uploadFile");
 addRoom.post("/", upload.array("file"), (req, res) => {
   (async () => {
     try {
@@ -25,11 +26,14 @@ addRoom.post("/", upload.array("file"), (req, res) => {
         lat,
         lon,
       } = JSON.parse(req.body.form);
-      const img = [];
 
-      req.files.map((file) => {
-        img.push(file.filename);
-      });
+      const img = await Promise.all(
+        req.files.map(async (file) => {
+          const imgUrl = await uploadToCloud(file);
+          return imgUrl;
+        })
+      );
+
       const newRoom = new Room({
         noOfRooms: noOfRooms,
         maxPeople: maxPeople,

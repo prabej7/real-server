@@ -2,6 +2,7 @@ const { Router } = require("express");
 const checkFields = require("../../middlewares/checkFields.middleware");
 const checkUser = require("../../utils/checkUser.utils");
 const User = require("../../models/user.model");
+const MessageBox = require("../../models/messagebox.model");
 const { getToken } = require("../../services/auth");
 const { hashSync } = require("bcrypt");
 const register = Router();
@@ -19,6 +20,14 @@ register.post("/", checkFields(2), (req, res) => {
           avatar:
             "https://res.cloudinary.com/dltll41fu/image/upload/v1722523891/user.png",
         });
+
+        const newMessageBox = new MessageBox({
+          messages: {},
+          user: newUser._id,
+        });
+        newUser.messageId = newMessageBox._id;
+        newUser.messages = newMessageBox;
+        await newMessageBox.save();
 
         const savedUser = await newUser.save();
         const token = getToken({

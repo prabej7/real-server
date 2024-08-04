@@ -27,6 +27,9 @@ app.use("/add-hostel", require("./routes/admin/addHostel.routes"));
 app.use("/rooms", require("./routes/get/room.routes"));
 app.use("/book-room", require("./routes/accounts/booRoom.routes"));
 app.use("/get-admin", require("./routes/get/admin.routes"));
+app.use("/message", require("./routes/accounts/message.routes"));
+app.use("/get-messages", require("./routes/get/messages.routes"));
+app.use("/get-messagebox", require("./routes/get/messageBox"));
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

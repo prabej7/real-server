@@ -48,6 +48,11 @@ const userSchema = new Schema(
         ref: "hostel",
       },
     ],
+    messages: {
+      type: Schema.Types.ObjectId,
+      ref: "messageBox",
+    },
+    messageId: { type: String },
   },
   {
     timestamps: true,

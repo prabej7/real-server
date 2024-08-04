@@ -16,7 +16,7 @@ login.post("/", checkFields(2), (req, res) => {
         const isPasswordCorrect = compareSync(password, user.password);
         if (isPasswordCorrect) {
           const token = getToken({
-            id: user.id,
+            id: user._id,
             email: user.email,
           });
           return res

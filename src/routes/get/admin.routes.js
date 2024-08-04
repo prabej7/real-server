@@ -14,9 +14,6 @@ getAdmin.get("/", (req, res) => {
         })
         .populate({
           path: "rooms",
-        })
-        .populate({
-          path: "messages",
         });
 
       return res.status(200).json(admin);
