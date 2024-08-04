@@ -13,6 +13,7 @@ getUser.post("/", (req, res) => {
         const user = await User.findOne({ _id: isVerfied.id }).populate(
           "messages"
         );
+
         return res.status(200).json(user);
       } else {
         return res.status(401).json({ error: "Access Denied!" });

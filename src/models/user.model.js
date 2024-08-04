@@ -28,11 +28,6 @@ const userSchema = new Schema(
     address: {
       type: String,
     },
-    isVerified: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     avatar: {
       type: String,
     },
@@ -53,6 +48,9 @@ const userSchema = new Schema(
       ref: "messageBox",
     },
     messageId: { type: String },
+    verified: {
+      type: Boolean,
+    },
   },
   {
     timestamps: true,

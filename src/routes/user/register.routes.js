@@ -16,7 +16,7 @@ register.post("/", checkFields(2), (req, res) => {
         const newUser = new User({
           email: email,
           password: hashSync(password, 12),
-          isVerified: false,
+          verified: false,
           avatar:
             "https://res.cloudinary.com/dltll41fu/image/upload/v1722523891/user.png",
         });
