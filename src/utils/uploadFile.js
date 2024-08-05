@@ -1,11 +1,11 @@
 const cloud = require("../config/cloud");
 const path = require("path");
-
+const { generate } = require("randomstring");
 const uploadFile = async (file) => {
   return new Promise((resolve, reject) => {
     const uploadResult = cloud.uploader.upload_stream(
       {
-        public_id: path.parse(file.originalname).name,
+        public_id: path.parse(generate(6) + file.originalname).name,
       },
       async (error, result) => {
         if (error) {
