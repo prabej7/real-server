@@ -31,10 +31,13 @@ addHostel.post("/", upload.array("file"), (req, res) => {
       } = JSON.parse(req.body.form);
       const adminId = getData(token).id;
       const admin = await Admin.findById(adminId);
-      const imgs = [];
-      req.files.map((img) => {
-        imgs.push(img.path);
-      });
+
+      const imgs = await Promise.all(
+        req.files.map(async (file) => {
+          const imgUrl = await uploadToCloud(file);
+          return imgUrl;
+        })
+      );
       const newHostel = new Hostel({
         address: address,
         cctv: ccTv,
