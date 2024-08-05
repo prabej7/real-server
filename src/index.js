@@ -9,7 +9,7 @@ const app = express();
 const { getData } = require("./services/auth");
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: "http://localhost:5173" },
+  cors: { origin: "https://real-weld.vercel.app" },
 });
 
 let users = {};
