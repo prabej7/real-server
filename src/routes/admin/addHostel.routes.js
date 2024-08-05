@@ -3,6 +3,7 @@ const Hostel = require("../../models/hostel.model");
 const Admin = require("../../models/admin.model");
 const upload = require("../../middlewares/multer");
 const { getData } = require("../../services/auth");
+const uploadToCloud = require("../../utils/uploadFile");
 const addHostel = Router();
 
 addHostel.post("/", upload.array("file"), (req, res) => {
@@ -38,6 +39,7 @@ addHostel.post("/", upload.array("file"), (req, res) => {
           return imgUrl;
         })
       );
+
       const newHostel = new Hostel({
         address: address,
         cctv: ccTv,
@@ -66,6 +68,7 @@ addHostel.post("/", upload.array("file"), (req, res) => {
       await admin.save();
       return res.status(200).json({ message: "Successfully hostel added!" });
     } catch (e) {
+      console.log(e);
       return res.status(500).json({ error: "Internal Server Error!" });
     }
   })();

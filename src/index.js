@@ -94,6 +94,9 @@ app.use("/get-admin", require("./routes/get/admin.routes"));
 app.use("/message", require("./routes/accounts/message.routes"));
 app.use("/get-messages", require("./routes/get/messages.routes"));
 app.use("/get-messagebox", require("./routes/get/messageBox"));
+app.use("/delete-room", require("./routes/admin/deleteRoom.routes"));
+app.use("/get-hostels", require("./routes/get/getHostels.routes"));
+app.use("/delete-hostel", require("./routes/admin/deleteHostel.routes"));
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
