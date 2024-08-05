@@ -1,8 +1,64 @@
 require("dotenv").config();
+const http = require("http");
+const { Server } = require("socket.io");
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
+
+const { getData } = require("./services/auth");
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: { origin: "http://localhost:5173" },
+});
+
+let users = {};
+
+io.on("connection", (socket) => {
+  const token = socket.handshake.query.token;
+  const userId = getData(token).id;
+  users[userId] = socket.id;
+
+  socket.on("send-message", (data) => {
+    message(data);
+
+    let newdata = {};
+    if (data.role == "user") {
+      newdata = {
+        isAdmin: false,
+        userMsg: data.text,
+      };
+    } else {
+      newdata = {
+        isAdmin: true,
+        adminMsg: data.text,
+      };
+    }
+    const userid = getData(data.user).id;
+    const userSocketId = users[userid];
+    if (userSocketId) {
+      io.to(userSocketId).emit("receive-message", newdata);
+      if (data.toUser) {
+        const targetUserSocketId = users[data.toUser];
+        io.to(targetUserSocketId).emit("receive-message", newdata);
+      }
+    }
+    // socket.emit("receive-message", newdata);
+    if (data.role == "user") {
+      Admin.findOne({ role: "main" }).then((admin) => {
+        const targetedUserId = admin._id;
+        const targetUser = users[targetedUserId];
+        if (targetUser) {
+          io.to(targetUser).emit("receive-message", newdata);
+        }
+      });
+    }
+  });
+
+  socket.on("disconnect", () => {
+    delete users[userId];
+  });
+});
 
 // Middlewares
 app.use(bodyParser.json());
@@ -10,6 +66,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const connectToDB = require("./config/db");
+const message = require("./controllers/messages");
+const Admin = require("./models/admin.model");
+
 connectToDB();
 
 // Routes
@@ -38,6 +97,6 @@ app.use((err, req, res, next) => {
 
 // Start the server
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
