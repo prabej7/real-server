@@ -9,7 +9,8 @@ auth.post("/", checkFields(1), (req, res) => {
     try {
       const { token } = req.body;
       const isVerified = getData(token);
-      if (isVerified !== 1) {
+      const isUser = await User.findById(isVerified.id);
+      if (isVerified !== 1 && isUser) {
         return res.status(200).json({ message: "User authorized!" });
       }
       return res.status(401).json({ error: "Access Denied!" });
