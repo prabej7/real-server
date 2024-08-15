@@ -29,6 +29,8 @@ addHostel.post("/", upload.array("file"), (req, res) => {
         address,
         lat,
         lon,
+        price,
+        city,
       } = JSON.parse(req.body.form);
       const adminId = getData(token).id;
       const admin = await Admin.findById(adminId);
@@ -62,6 +64,8 @@ addHostel.post("/", upload.array("file"), (req, res) => {
         washroom: washroom,
         wifi: wifi,
         img: imgs,
+        price: price,
+        city: city,
       });
       const savedHostel = await newHostel.save();
       admin.hostels.push(savedHostel);

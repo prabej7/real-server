@@ -54,6 +54,12 @@ const roomSchema = new Schema({
       type: Number,
     },
   },
+  price: {
+    type: Number,
+  },
+  city: {
+    type: String,
+  },
 });
 
 const Room = model("room", roomSchema);

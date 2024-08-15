@@ -33,6 +33,11 @@ const landSchema = new Schema({
       type: Number,
     },
   },
+  price: {
+    type: Number,
+  },
 });
 
 const Land = model("land", landSchema);
+
+module.exports = Land;

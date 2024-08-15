@@ -25,6 +25,8 @@ addRoom.post("/", upload.array("file"), (req, res) => {
         address,
         lat,
         lon,
+        price,
+        city,
       } = JSON.parse(req.body.form);
 
       const img = await Promise.all(
@@ -53,6 +55,8 @@ addRoom.post("/", upload.array("file"), (req, res) => {
           lat: lat,
           lon: lon,
         },
+        price: price,
+        city: city,
       });
       const savedRoom = await newRoom.save();
       const admin_id = getData(token).id;

@@ -60,6 +60,12 @@ const hostelSchema = new Schema({
       type: Number,
     },
   },
+  price: {
+    type: Number,
+  },
+  city: {
+    type: String,
+  },
 });
 
 const Hostel = model("hostel", hostelSchema);
