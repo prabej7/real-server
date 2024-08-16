@@ -8,9 +8,12 @@ queryHostel.post("/", (req, res) => {
       const { query } = req.body;
       const allHostels = await Hostel.find();
       const queriedHostel = allHostels.filter((hostel) => {
-        return hostel.address.toLocaleLowerCase().includes(query)
-          ? hostel
-          : false;
+        if (hostel.address.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        } else if (hostel.city.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        }
+        return false;
       });
       return res.status(200).json(queriedHostel);
     } catch (e) {

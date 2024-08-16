@@ -7,9 +7,16 @@ queryRooms.post("/", (req, res) => {
     try {
       const { query } = req.body;
       const allRooms = await Room.find();
+
       const queriedRooms = allRooms.filter((room) => {
-        return room.address.toLocaleLowerCase().includes(query) ? room : false;
+        if (room.address.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        } else if (room.city.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        }
+        return false;
       });
+
       return res.status(200).json(queriedRooms);
     } catch (e) {
       return res.status(500).json({ error: "Internal Server Error." });
