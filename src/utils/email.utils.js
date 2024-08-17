@@ -89,7 +89,7 @@ const sendMail = async (email, otp) => {
                 <p style="font-size:12px" >Please use this code to complete your transaction.</p>
                 <div class="footer">
                     <p style="margin-bottom: 12px; font-size:12px" >If you didn't request this code, please ignore this email.</p>
-                    <p>Best regards,<br>Your Company</p>
+                    <p>Best regards,<br>Real Renting</p>
                 </div>
             </footer>
         </div>
