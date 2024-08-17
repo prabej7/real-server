@@ -18,7 +18,7 @@ register.post("/", checkFields(2), (req, res) => {
           password: hashSync(password, 12),
           verified: false,
           avatar:
-            "https://res.cloudinary.com/dltll41fu/image/upload/v1722523891/user.png",
+            "https://res.cloudinary.com/dltll41fu/image/upload/v1723873990/smpxlcnzpqi84itowkop.png",
         });
 
         const newMessageBox = new MessageBox({

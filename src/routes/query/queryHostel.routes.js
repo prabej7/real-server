@@ -5,18 +5,26 @@ const queryHostel = Router();
 queryHostel.post("/", (req, res) => {
   (async () => {
     try {
-      const { query } = req.body;
+      let { query } = req.body;
+
       const allHostels = await Hostel.find();
-      const queriedHostel = allHostels.filter((hostel) => {
-        if (hostel.address.toLowerCase().includes(query.toLowerCase())) {
-          return true;
-        } else if (hostel.city.toLowerCase().includes(query.toLowerCase())) {
-          return true;
-        }
-        return false;
+      query = query.toLowerCase();
+      console.log(query);
+      const filteredHostels = allHostels.filter((hostel) => {
+        return (
+          hostel.city.toLowerCase().includes(query) ||
+          hostel.address.toLowerCase().includes(query) ||
+          Object.keys(hostel).some((key) =>
+            typeof hostel[key] === "boolean"
+              ? key.toLowerCase().includes(query) && hostel[key]
+              : false
+          )
+        );
       });
-      return res.status(200).json(queriedHostel);
+
+      return res.status(200).json(filteredHostels);
     } catch (e) {
+      console.log(e);
       return res.status(500).json({ error: "Internal Server Error." });
     }
   })();

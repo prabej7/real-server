@@ -15,7 +15,7 @@ partial.post("/", upload.single("file"), (req, res) => {
       const user = await User.findById(user_id);
       if (
         user.avatar !==
-        "https://res.cloudinary.com/dltll41fu/image/upload/v1722523891/user.png"
+        "https://res.cloudinary.com/dltll41fu/image/upload/v1723873990/smpxlcnzpqi84itowkop.png"
       ) {
         deleteFile(user.avatar);
       }
