@@ -31,6 +31,12 @@ const adminSchema = new Schema({
       ref: "hostel",
     },
   ],
+  lands:[
+    {
+      type: Schema.Types.ObjectId,
+      ref:"land"
+    }
+  ],
   tenants: [
     {
       type: Schema.Types.ObjectId,

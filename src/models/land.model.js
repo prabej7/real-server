@@ -13,11 +13,11 @@ const landSchema = new Schema({
   balcony: {
     type: Boolean,
   },
-  frunished: {
+  furnished: {
     type: Boolean,
   },
   roadSize: {
-    type: Boolean,
+    type: String,
   },
   distance: {
     type: String,
@@ -35,6 +35,12 @@ const landSchema = new Schema({
   },
   price: {
     type: Number,
+  },
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
   },
 });
 

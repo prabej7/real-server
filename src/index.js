@@ -100,6 +100,9 @@ app.use("/delete-hostel", require("./routes/admin/deleteHostel.routes"));
 app.use("/auth-admin", require("./routes/auth/authAdmin.routes"));
 app.use("/query-rooms", require("./routes/query/queryRooms.routes"));
 app.use("/query-hostels", require("./routes/query/queryHostel.routes"));
+app.use("/add-land", require("./routes/admin/Land/Add"));
+app.use("/get-lands", require("./routes/admin/Land/get"));
+app.use("/delete-land", require("./routes/admin/Land/delete"));
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
